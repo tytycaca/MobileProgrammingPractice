@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerInput : MonoBehaviour
 {
     private float timer = 0.0f;
+    private float z = 0.0f;
     private float defaultMovementTimer = 0.0f;
     private bool lCheck = false;
     private bool rCheck = false;
@@ -33,6 +34,14 @@ public class PlayerInput : MonoBehaviour
     private void moveRight ()
     {
         transform.position += Vector3.right / 2;
+    }
+
+    private void turnCCW()
+    {
+        z += 90.0f;
+        if (z == 360.0f)
+            z = 0.0f;
+        transform.rotation = Quaternion.Euler(0.0f, 0.0f, z);
     }
 
     public bool getStopValue()
@@ -110,6 +119,8 @@ public class PlayerInput : MonoBehaviour
             if (timer > 0.1f && !lCheck && transform.tag != "StopBlock")
             {
                 moveLeft();
+                lCheck = false;
+                rCheck = false;
                 timer = 0.0f;
             }
         }
@@ -120,7 +131,19 @@ public class PlayerInput : MonoBehaviour
             if (timer > 0.1f && !rCheck && transform.tag != "StopBlock")
             {
                 moveRight();
+                lCheck = false;
+                rCheck = false;
                 timer = 0.0f;
+            }
+        }
+
+        else if (Input.GetKeyDown(KeyCode.UpArrow))
+        {
+            if (!lCheck && !rCheck &&transform.tag != "StopBlock")
+            {
+                turnCCW();
+                lCheck = false;
+                rCheck = false;
             }
         }
 
