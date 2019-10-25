@@ -6,6 +6,13 @@ public class Spawner : MonoBehaviour {
 
     private GameObject[] blockPrefabs = new GameObject[7];
     private float timer = 0.0f;
+    //private PlayerInput PlayerInput = new PlayerInput();
+    private bool insCheck = true;
+
+    public void setInsCheck(bool tf)
+    {
+        insCheck = tf;
+    }
 
     private void spawnBlocks(GameObject prefab, Vector3 pos)
     {
@@ -14,7 +21,7 @@ public class Spawner : MonoBehaviour {
 
     // Use this for initialization
     void Start ()
-    {
+    { 
         blockPrefabs[0] = Resources.Load("Prefab/IBlock") as GameObject;
         blockPrefabs[1] = Resources.Load("Prefab/LeftLBlock") as GameObject;
         blockPrefabs[2] = Resources.Load("Prefab/RightLBlock") as GameObject;
@@ -23,17 +30,18 @@ public class Spawner : MonoBehaviour {
         blockPrefabs[5] = Resources.Load("Prefab/TBlock") as GameObject;
         blockPrefabs[6] = Resources.Load("Prefab/SquareBlock") as GameObject;
 
-        spawnBlocks(blockPrefabs[Random.Range(6, 6)], new Vector3(0, 19, 0));
+        //spawnBlocks(blockPrefabs[Random.Range(0, 7)], new Vector3(0, 19, 0));
+
+        //PlayerInput = GameObject.FindGameObjectWithTag("BlockPrefabs").GetComponent<PlayerInput>();
     }
 	
 	// Update is called once per frame
 	void Update ()
     {
-        //timer += Time.deltaTime;
-        //if (timer > 1.0f)
-        //{
-        //    spawnBlocks(blockPrefabs[Random.Range(0, 7)], new Vector3(0, 19, 0));
-        //    timer -= 1.0f;
-        //}
+        if (insCheck)
+        {
+            spawnBlocks(blockPrefabs[Random.Range(0, 7)], new Vector3(0, 19, 0)); ;
+            insCheck = false;
+        }
     }
 }

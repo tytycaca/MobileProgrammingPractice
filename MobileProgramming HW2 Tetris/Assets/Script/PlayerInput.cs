@@ -5,8 +5,15 @@ using UnityEngine;
 public class PlayerInput : MonoBehaviour
 {
     private float timer = 0.0f;
-    private float leftBoundary = 0.0f;
-    private float rightBoundary = 0.0f;
+    private float defaultMovementTimer = 0.0f;
+    private bool lCheck = false;
+    private bool rCheck = false;
+    private bool isMoving = false;
+
+    private Spawner Spawner = new Spawner();
+
+    [SerializeField]
+    private bool stop = false;
 
     public void moveDown()
     {
@@ -15,7 +22,7 @@ public class PlayerInput : MonoBehaviour
 
     private void moveUp()
     {
-        transform.position += Vector3.up / 2;
+        transform.position += Vector3.up;
     }
 
     private void moveLeft ()
@@ -28,53 +35,58 @@ public class PlayerInput : MonoBehaviour
         transform.position += Vector3.right / 2;
     }
 
+    public bool getStopValue()
+    {
+        return stop;
+    }
+
+    public void setStopValue(bool tf)
+    {
+        stop = tf;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        Debug.Log(other.tag);
+        
+
+        if (other.transform.tag == "StopBlock")
+        {
+            //Vector3 tmpVec = new Vector3();
+
+            //tmpVec = new Vector3((other.transform.position.x - transform.position.x), 0, 0);
+            //Debug.Log(tmpVec.normalized);
+
+            //if ((tmpVec).normalized == new Vector3(-1.0f, 0.0f, 0.0f)
+            //    || (tmpVec).normalized == new Vector3(1.0f, 0.0f, 0.0f))
+            //    return;
+
+            transform.tag = "StopBlock";
+            for (int i = 0; i < 4; i++)
+            {
+                transform.GetChild(i).tag = "StopBlock";
+            }
+            stop = true;
+            Spawner.setInsCheck(true);
+        }
+
+        else if (other.transform.tag == "LWall")
+        {
+            lCheck = true;
+            rCheck = false;
+        }
+
+        else if (other.transform.tag == "RWall")
+        {
+            rCheck = true;
+            lCheck = false;
+        }
+    }
+
     // Use this for initialization
     void Start ()
     {
-        Debug.Log(gameObject.name);
-
-        if (gameObject.name == "IBlock(Clone)")
-        {
-            leftBoundary = -3.0f;
-            rightBoundary = 3.0f;
-            
-        }
-
-        else if (gameObject.name == "LeftLBlock(Clone)")
-        {
-            leftBoundary = -5.0f;
-            rightBoundary = 2.0f;
-        }
-
-        else if (gameObject.name == "RightLBlock(Clone)")
-        {
-            leftBoundary = -3.0f;
-            rightBoundary = 4.0f;
-        }
-
-        else if (gameObject.name == "SBlock(Clone)")
-        {
-            leftBoundary = -4.0f;
-            rightBoundary = 3.0f;
-        }
-
-        else if (gameObject.name == "ZBlock(Clone)")
-        {
-            leftBoundary = -3.0f;
-            rightBoundary = 4.0f;
-        }
-
-        else if (gameObject.name == "TBlock(Clone)")
-        {
-            leftBoundary = -4.0f;
-            rightBoundary = 3.0f;
-        }
-
-        else if (gameObject.name == "SquareBlock(Clone)")
-        {
-            leftBoundary = -4.0f;
-            rightBoundary = 4.0f;
-        } 
+        Spawner = GameObject.FindGameObjectWithTag("Spawner").GetComponent<Spawner>();
     }
 	
 	// Update is called once per frame
@@ -83,23 +95,21 @@ public class PlayerInput : MonoBehaviour
         if (Input.GetKey(KeyCode.DownArrow))
         {
             timer += Time.deltaTime;
-            if (timer > 0.1f)
+            if (timer > 0.1f && !stop && transform.tag != "StopBlock")
             {
                 moveDown();
-                if (transform.position.y < 1)
-                    moveUp();
                 timer = 0.0f;
             }
+
+            return;
         }
 
         else if (Input.GetKey(KeyCode.LeftArrow))
         {
             timer += Time.deltaTime;
-            if (timer > 0.1f)
+            if (timer > 0.1f && !lCheck && transform.tag != "StopBlock")
             {
                 moveLeft();
-                if (transform.position.x < leftBoundary || transform.position.x > rightBoundary)
-                    moveRight();
                 timer = 0.0f;
             }
         }
@@ -107,13 +117,18 @@ public class PlayerInput : MonoBehaviour
         else if (Input.GetKey(KeyCode.RightArrow))
         {
             timer += Time.deltaTime;
-            if (timer > 0.1f)
+            if (timer > 0.1f && !rCheck && transform.tag != "StopBlock")
             {
                 moveRight();
-                if (transform.position.x < leftBoundary || transform.position.x > rightBoundary)
-                    moveLeft();
                 timer = 0.0f;
             }
+        }
+
+        defaultMovementTimer += Time.deltaTime;
+        if (defaultMovementTimer > 1.0 && transform.tag != "StopBlock")
+        {
+            moveDown();
+            defaultMovementTimer = 0.0f;
         }
     }
 }

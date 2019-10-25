@@ -5,12 +5,22 @@ using UnityEngine;
 public class DefaultMovement : MonoBehaviour
 {
     private float timer = 0.0f;
-    private PlayerInput PlayerInput = new PlayerInput();
+    private bool stopCheck = false;
+
+    public void moveDown()
+    {
+        transform.position += Vector3.down;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.transform.tag == "StopBlock")
+            stopCheck = true;
+    }
 
     // Use this for initialization
     void Start ()
     {
-        PlayerInput = GameObject.FindGameObjectWithTag("BlockPrefabs").GetComponent<PlayerInput>();
 
     }
 	
@@ -18,9 +28,9 @@ public class DefaultMovement : MonoBehaviour
 	void Update ()
     {
         timer += Time.deltaTime;
-        if (timer > 1.0f)
+        if (timer > 1.0 && !stopCheck)
         {
-            PlayerInput.moveDown();
+            moveDown();
             timer = 0.0f;
         }
     }
