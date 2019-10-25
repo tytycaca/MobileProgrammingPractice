@@ -22,16 +22,18 @@ public class Spawner : MonoBehaviour {
         blockPrefabs[4] = Resources.Load("Prefab/ZBlock") as GameObject;
         blockPrefabs[5] = Resources.Load("Prefab/TBlock") as GameObject;
         blockPrefabs[6] = Resources.Load("Prefab/SquareBlock") as GameObject;
+
+        spawnBlocks(blockPrefabs[Random.Range(6, 6)], new Vector3(0, 19, 0));
     }
 	
 	// Update is called once per frame
 	void Update ()
     {
-        timer += Time.deltaTime;
-        if (timer > 1.0f)
-        {
-            spawnBlocks(blockPrefabs[Random.Range(0, 7)], new Vector3(0, 19, 0));
-            timer -= 1.0f;
-        }
+        //timer += Time.deltaTime;
+        //if (timer > 1.0f)
+        //{
+        //    spawnBlocks(blockPrefabs[Random.Range(0, 7)], new Vector3(0, 19, 0));
+        //    timer -= 1.0f;
+        //}
     }
 }

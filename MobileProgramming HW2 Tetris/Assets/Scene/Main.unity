@@ -1028,7 +1028,7 @@ GameObject:
   - component: {fileID: 313907780}
   m_Layer: 0
   m_Name: TopBlock
-  m_TagString: Untagged
+  m_TagString: stoppedBlocks
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1740,7 +1740,7 @@ GameObject:
   - component: {fileID: 522087551}
   m_Layer: 0
   m_Name: LeftBlock
-  m_TagString: Untagged
+  m_TagString: stoppedBlocks
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2376,7 +2376,7 @@ GameObject:
   - component: {fileID: 866678747}
   m_Layer: 0
   m_Name: RightBlock
-  m_TagString: Untagged
+  m_TagString: stoppedBlocks
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3301,7 +3301,7 @@ GameObject:
   - component: {fileID: 1354871608}
   m_Layer: 0
   m_Name: BottomBlock
-  m_TagString: Untagged
+  m_TagString: stoppedBlocks
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
