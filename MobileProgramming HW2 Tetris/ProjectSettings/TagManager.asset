@@ -11,6 +11,7 @@ TagManager:
   - RWall
   - Spawner
   - StopBlock
+  - GridSystem
   layers:
   - Default
   - TransparentFX
