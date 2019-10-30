@@ -11,7 +11,7 @@ public class Spawner : MonoBehaviour {
 
     // Use this for initialization
     void Start ()
-    { 
+    {
         blockPrefabs[0] = Resources.Load("Prefab/IBlock") as GameObject;
         blockPrefabs[1] = Resources.Load("Prefab/LeftLBlock") as GameObject;
         blockPrefabs[2] = Resources.Load("Prefab/RightLBlock") as GameObject;
@@ -73,6 +73,11 @@ public class Spawner : MonoBehaviour {
         }
     }
 
+    public int getModelNum()
+    {
+        return modelNum;
+    }
+
     public void setInsCheck(bool tf)
     {
         insCheck = tf;
@@ -80,6 +85,8 @@ public class Spawner : MonoBehaviour {
 
     private void spawnBlocks(GameObject prefab, Vector3 pos)
     {
-        Instantiate(prefab, pos, Quaternion.identity);
+        GameObject newObj = Instantiate(prefab);
+        newObj.transform.position = pos;
+        //, pos, Quaternion.identity
     }
 }

@@ -51,38 +51,66 @@ public class GridSystem : MonoBehaviour
         }
     }
 
-    public bool checkMoveGrid(int moveType, GameObject movingPrefab)
+    public bool checkMoveGrid(int moveType, Transform pTransform)
     {
         int i;
+        int cnt = 0;
 
         // moveDown
         if (moveType == 0)
         {
+            cnt = 0;
+
             for (i = 0; i < 4; i++)
             {
-                if (getGrid((int)(movingPrefab.transform.GetChild(i).position.x), (int)(movingPrefab.transform.GetChild(i).position.y - 1)))
-                    return false;
+                //Debug.Log(pTransform.GetChild(i).position.y);
+                if (getGrid((int)(pTransform.GetChild(i).position.x), (int)(pTransform.GetChild(i).position.y - 1)))
+                    cnt++;
             }
+
+            if (cnt > 0)
+                return false;
+            else
+                return true;
         }
 
         // moveLeft
         else if (moveType == 1)
         {
+            cnt = 0;
+
             for (i = 0; i < 4; i++)
             {
-                if (getGrid((int)movingPrefab.transform.GetChild(i).position.x - 1, (int)movingPrefab.transform.GetChild(i).position.y))
-                    return false;
+                if (getGrid((int)pTransform.GetChild(i).position.x - 1, (int)pTransform.GetChild(i).position.y))
+                {
+                    cnt++;
+                    Debug.Log(i);
+                }
             }
+
+            Debug.Log(cnt);
+
+            if (cnt > 0)
+                return false;
+            else
+                return true;
         }
 
         // moveRight
         else if (moveType == 2)
         {
+            cnt = 0;
+
             for (i = 0; i < 4; i++)
             {
-                if (getGrid((int)movingPrefab.transform.GetChild(i).position.x + 1, (int)movingPrefab.transform.GetChild(i).position.y))
-                    return false;
+                if (getGrid((int)pTransform.GetChild(i).position.x + 1, (int)pTransform.GetChild(i).position.y))
+                    cnt++;
             }
+
+            if (cnt > 0)
+                return false;
+            else
+                return true;
         }
 
         return true;
