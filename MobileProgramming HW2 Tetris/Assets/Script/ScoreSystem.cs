@@ -18,7 +18,7 @@ public class ScoreSystem : MonoBehaviour
     {
         score = 0;
         finalScore = 0;
-        combo = 1;
+        combo = 0;
         timer = 0.0f;
 	}
 	
@@ -35,21 +35,21 @@ public class ScoreSystem : MonoBehaviour
 
     public void increaseScore()
     {
-        score += 100;
+        finalScore += 100;
     }
 
     public void increaseCombo(int times)
     {
-        combo += times;
+        combo = times;
     }
 
     public void resetCombo()
     {
-        combo = 1;
+        combo = 0;
     }
 
     public void calculateCombo()
     {
-        finalScore = score * combo;
+        finalScore += 100 * combo;
     }
 }

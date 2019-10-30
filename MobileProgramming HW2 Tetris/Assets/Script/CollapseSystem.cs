@@ -42,7 +42,7 @@ public class CollapseSystem : MonoBehaviour
 
         int internalCnt = 0;
 
-        for(int i = 21; i >= 1; i--)
+        for(int i = 20; i >= 1; i--)
         {
             internalCnt = 0;
 

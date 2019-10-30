@@ -70,6 +70,16 @@ public class BlockMovement : MonoBehaviour
             turn(m_Spawner.getModelNum());
         }
 
+        else if (Input.GetKeyDown(KeyCode.Space))
+        {
+            while(true)
+            {
+                if (transform.tag == "GarbageObj")
+                    break;
+                moveDown();
+            }
+        }
+
         defaultMovementTimer += Time.deltaTime;
         if (defaultMovementTimer > 1.0)
         {
