@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Spawner : MonoBehaviour {
+public class Spawner : MonoBehaviour
+{
 
     private GameObject[] blockPrefabs = new GameObject[7];
     private GameObject currentModel;

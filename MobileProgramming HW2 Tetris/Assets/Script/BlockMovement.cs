@@ -10,8 +10,11 @@ public class BlockMovement : MonoBehaviour
 
     private Spawner m_Spawner = new Spawner();
     private GridSystem m_GridSystem = new GridSystem();
-    private int modelNum;
+    private CollapseSystem m_CollapseSystem = new CollapseSystem();
 
+    private GameObject StopContainer;
+
+    private int modelNum;
     private int currentTurnState;
 
     // Use this for initialization
@@ -19,8 +22,11 @@ public class BlockMovement : MonoBehaviour
     {
         m_Spawner = GameObject.FindGameObjectWithTag("Spawner").GetComponent<Spawner>();
         m_GridSystem = GameObject.FindGameObjectWithTag("GridSystem").GetComponent<GridSystem>();
-        modelNum = -1;
+        m_CollapseSystem = GameObject.FindGameObjectWithTag("CollapseSystem").GetComponent<CollapseSystem>();
 
+        StopContainer = GameObject.FindGameObjectWithTag("StopContainer");
+
+        modelNum = -1;
         currentTurnState = 0;
     }
 
@@ -84,17 +90,22 @@ public class BlockMovement : MonoBehaviour
 
         else
         {
-            Debug.Log("stop pos : " + transform.position);
+            //Debug.Log("stop pos : " + transform.position);
 
-            transform.tag = "StopBlock";
+            transform.tag = "GarbageObj";
 
             for (int i = 0; i < 4; i++)
             {
-                transform.GetChild(i).tag = "StopBlock";
+                transform.GetChild(i).tag = "StopBlocks";
                 m_GridSystem.setGrid((int)transform.GetChild(i).position.x, (int)transform.GetChild(i).position.y, true);
-                m_Spawner.setInsCheck(true);
-                GetComponent<BlockMovement>().enabled = false;
+                //changeParent();
             }
+            transform.parent = StopContainer.transform;
+            changeParent();
+            //deleteGarbageObj();
+            m_CollapseSystem.collapseSequence();
+            m_Spawner.setInsCheck(true);
+            GetComponent<BlockMovement>().enabled = false;
         }
     }
 
@@ -115,6 +126,42 @@ public class BlockMovement : MonoBehaviour
         if (m_GridSystem.checkMoveGrid(2, transform))
             transform.position += Vector3.right;
     }
+
+    //private void turnCCW()
+    //{
+    //    transform.Rotate(new Vector3(0.0f, 0.0f, -90.0f));
+
+    //    for (int i = 0; i < 4; i++)
+    //        transform.GetChild(i).Rotate(new Vector3(0.0f, 0.0f, 90.0f));
+    //}
+
+    //private void turnCW()
+    //{
+    //    transform.Rotate(new Vector3(0.0f, 0.0f, 90.0f));
+
+    //    for (int i = 0; i < 4; i++)
+    //        transform.GetChild(i).Rotate(new Vector3(0.0f, 0.0f, -90.0f));
+    //}
+
+    //private void turn()
+    //{
+    //    int j = 1;
+    //    //for(int i = 1; i < 21; i++)
+    //    //{
+    //    //    Debug.Log(m_GridSystem.getGrid(j, i));
+    //    //}
+
+    //    turnCCW();
+
+    //    for (int i = 0; i < 4; i++)
+    //    {
+    //        if (m_GridSystem.getGrid((int)transform.GetChild(i).position.x, (int)transform.GetChild(i).position.y))
+    //        {
+    //            turnCW();
+    //            return;
+    //        }
+    //    }
+    //}
 
     private void turn(int modelNum)
     {
@@ -757,39 +804,28 @@ public class BlockMovement : MonoBehaviour
         }
     }
 
-    //private void turnCCW()
+    private void changeParent()
+    {
+        GameObject[] target = GameObject.FindGameObjectsWithTag("StopBlocks");
+
+        int length = target.Length;
+
+        for(int i = 0; i < length; i++)
+        {
+            target[i].transform.parent = StopContainer.transform;
+        }
+    }
+
+    //private void deleteGarbageObj()
     //{
-    //    transform.Rotate(new Vector3(0.0f, 0.0f, -90.0f));
+    //    GameObject[] target = GameObject.FindGameObjectsWithTag("GabrbageObj");
 
-    //    for (int i = 0; i < 4; i++)
-    //        transform.GetChild(i).Rotate(new Vector3(0.0f, 0.0f, 90.0f));
-    //}
+    //    int length = target.Length;
 
-    //private void turnCW()
-    //{
-    //    transform.Rotate(new Vector3(0.0f, 0.0f, 90.0f));
-
-    //    for (int i = 0; i < 4; i++)
-    //        transform.GetChild(i).Rotate(new Vector3(0.0f, 0.0f, -90.0f));
-    //}
-
-    //private void turn()
-    //{
-    //    int j = 1;
-    //    //for(int i = 1; i < 21; i++)
-    //    //{
-    //    //    Debug.Log(m_GridSystem.getGrid(j, i));
-    //    //}
-
-    //    turnCCW();
-
-    //    for (int i = 0; i < 4; i++)
+    //    for (int i = 0; i < length; i++)
     //    {
-    //        if (m_GridSystem.getGrid((int)transform.GetChild(i).position.x, (int)transform.GetChild(i).position.y))
-    //        {
-    //            turnCW();
-    //            return;
-    //        }
+    //        Destroy(target[i].transform);
     //    }
     //}
+
 }

@@ -293,6 +293,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Script\BlockMovement.cs" />
+    <Compile Include="Assets\Script\CollapseSystem.cs" />
     <Compile Include="Assets\Script\GridSystem.cs" />
     <Compile Include="Assets\Script\Spawner.cs" />
   </ItemGroup>

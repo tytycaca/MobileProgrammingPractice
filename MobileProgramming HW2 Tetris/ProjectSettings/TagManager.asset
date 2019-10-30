@@ -10,8 +10,11 @@ TagManager:
   - LWall
   - RWall
   - Spawner
-  - StopBlock
   - GridSystem
+  - CollapseSystem
+  - StopBlocks
+  - StopContainer
+  - GarbageObj
   layers:
   - Default
   - TransparentFX

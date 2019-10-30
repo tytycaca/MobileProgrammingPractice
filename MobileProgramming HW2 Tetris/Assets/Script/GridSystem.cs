@@ -63,7 +63,7 @@ public class GridSystem : MonoBehaviour
 
             for (i = 0; i < 4; i++)
             {
-                //Debug.Log(pTransform.GetChild(i).position.y);
+                // Debug.Log(pTransform.GetChild(i).position.y);
                 if (getGrid((int)(pTransform.GetChild(i).position.x), (int)(pTransform.GetChild(i).position.y - 1)))
                     cnt++;
             }
@@ -84,11 +84,11 @@ public class GridSystem : MonoBehaviour
                 if (getGrid((int)pTransform.GetChild(i).position.x - 1, (int)pTransform.GetChild(i).position.y))
                 {
                     cnt++;
-                    Debug.Log(i);
+                    // Debug.Log(i);
                 }
             }
 
-            Debug.Log(cnt);
+            // Debug.Log(cnt);
 
             if (cnt > 0)
                 return false;
