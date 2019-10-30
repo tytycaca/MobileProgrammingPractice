@@ -111,7 +111,7 @@ MonoBehaviour:
   m_MinSize: {x: 917, y: 442}
   m_MaxSize: {x: 22012, y: 10021}
   vertical: 0
-  controlID: 131
+  controlID: 74
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -135,7 +135,7 @@ MonoBehaviour:
   m_MinSize: {x: 202, y: 442}
   m_MaxSize: {x: 4002, y: 8042}
   vertical: 1
-  controlID: 29
+  controlID: 12
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -370,14 +370,14 @@ MonoBehaviour:
     height: 487
   m_PersistentViewDataDictionary: {fileID: 0}
   m_SceneLighting: 1
-  lastFramingTime: 131.7246083
+  lastFramingTime: 2726.4698928999996
   m_2DMode: 0
   m_isRotationLocked: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 0.7282723, y: 7.8258395, z: 2.3803902}
+    m_Target: {x: 885, y: 904, z: 0}
     speed: 2
-    m_Value: {x: 0.7282723, y: 7.8258395, z: 2.3803902}
+    m_Value: {x: 885, y: 904, z: 0}
   m_RenderMode: 0
   m_ValidateTrueMetals: 0
   m_SceneViewState:
@@ -401,13 +401,13 @@ MonoBehaviour:
       speed: 2
       m_Value: 0
   m_Rotation:
-    m_Target: {x: -0.14794694, y: -0.01038487, z: 0.0015488634, w: -0.9889396}
+    m_Target: {x: -0.17016327, y: 0.0073898127, z: -0.0012808687, w: -0.9853874}
     speed: 2
-    m_Value: {x: -0.14794694, y: -0.01038487, z: 0.0015488634, w: -0.9889396}
+    m_Value: {x: -0.17016327, y: 0.0073898127, z: -0.0012808687, w: -0.9853874}
   m_Size:
-    m_Target: 27.194607
+    m_Target: 805.80164
     speed: 2
-    m_Value: 27.194607
+    m_Value: 805.80164
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -518,9 +518,9 @@ MonoBehaviour:
   m_PersistentViewDataDictionary: {fileID: 0}
   m_TreeViewState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: ee2a0000
-    m_LastClickedID: 10990
-    m_ExpandedIDs: 98fbffff00000000
+    m_SelectedIDs: 
+    m_LastClickedID: 0
+    m_ExpandedIDs: 48edffff98fbffff00000000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -582,7 +582,7 @@ MonoBehaviour:
     m_ShowAllHits: 0
     m_SearchArea: 0
     m_Folders:
-    - Assets/Script
+    - Assets/Resources/Prefab
   m_ViewMode: 0
   m_StartGridSize: 64
   m_LastFolders: []
@@ -622,7 +622,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 0000000086270000ac270000ae2700002a2800004e280000
+    m_ExpandedIDs: 0000000086270000ac270000ae2700002a2800004e280000808d0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 

@@ -16,6 +16,9 @@ TagManager:
   - StopContainer
   - GarbageObj
   - ScoreSystem
+  - ScoreValue
+  - ComboValue
+  - SamplePrefabs
   layers:
   - Default
   - TransparentFX
