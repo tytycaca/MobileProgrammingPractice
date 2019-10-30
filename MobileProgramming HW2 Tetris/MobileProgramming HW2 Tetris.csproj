@@ -295,6 +295,7 @@
     <Compile Include="Assets\Script\BlockMovement.cs" />
     <Compile Include="Assets\Script\CollapseSystem.cs" />
     <Compile Include="Assets\Script\GridSystem.cs" />
+    <Compile Include="Assets\Script\ScoreSystem.cs" />
     <Compile Include="Assets\Script\Spawner.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

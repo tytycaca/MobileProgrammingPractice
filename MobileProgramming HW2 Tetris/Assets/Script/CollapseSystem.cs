@@ -5,13 +5,20 @@ using UnityEngine;
 public class CollapseSystem : MonoBehaviour
 {
     private GridSystem m_GridSystem = new GridSystem();
+    private ScoreSystem m_ScoreSystem = new ScoreSystem();
     private GameObject StopContainer;
     private int length;
+    private int comboCount;
+    private int scoreCount;
 
     // Use this for initialization
     void Start ()
     {
+        comboCount = 0;
+        scoreCount = 0;
+
         m_GridSystem = GameObject.FindGameObjectWithTag("GridSystem").GetComponent<GridSystem>();
+        m_ScoreSystem = GameObject.FindGameObjectWithTag("ScoreSystem").GetComponent<ScoreSystem>();
     }
 	
 	// Update is called once per frame
@@ -42,13 +49,29 @@ public class CollapseSystem : MonoBehaviour
             for (int j = 1; j < 11; j++)
             {
                 if (m_GridSystem.getGrid(j, i))
+                {
                     internalCnt++;
+                }
             }
             if (internalCnt == 10)
             {
                 collapseGridY[i] = true;
+                comboCount++;
                 doCollapse(i);
+                m_ScoreSystem.increaseScore();
             }
+        }
+
+        if (comboCount > 1)
+        {
+            m_ScoreSystem.increaseCombo(comboCount);
+            m_ScoreSystem.calculateCombo();
+            comboCount = 0;
+        }
+        else
+        {
+            m_ScoreSystem.resetCombo();
+            comboCount = 0;
         }
 
         return collapseGridY;
@@ -89,56 +112,56 @@ public class CollapseSystem : MonoBehaviour
         }
 
         return;
-
     }
 
-    private void doCollapse(bool[] collapseGridY)
-    {
-        StopContainer = GameObject.FindGameObjectWithTag("StopContainer");
-        length = StopContainer.transform.childCount;
-        int a = 0;
-        bool af = false;
-        for (int i = 1; i < 21; i++)
-        {
-            if(collapseGridY[i])
-            {
-                a = i;
-                af = true;
-                for (int j = 0; j < length; j++)
-                {
-                    if(StopContainer.transform.GetChild(j).position.y == i)
-                    {
-                        Destroy(StopContainer.transform.GetChild(j).gameObject);
-                    }
-                }
+    //private void doCollapse(bool[] collapseGridY)
+    //{
+    //    StopContainer = GameObject.FindGameObjectWithTag("StopContainer");
+    //    length = StopContainer.transform.childCount;
+    //    int tmp = 0;
+    //    bool tf = false;
 
-                for(int j = 1; j < 11; j++)
-                {
-                    m_GridSystem.setGrid(j, i, false);
-                }
+    //    for (int i = 1; i < 21; i++)
+    //    {
+    //        if(collapseGridY[i])
+    //        {
+    //            tmp = i;
+    //            tf = true;
+    //            for (int j = 0; j < length; j++)
+    //            {
+    //                if(StopContainer.transform.GetChild(j).position.y == i)
+    //                {
+    //                    Destroy(StopContainer.transform.GetChild(j).gameObject);
+    //                }
+    //            }
 
-                for (int j = 1; j < length; j++)
-                {
-                    if (StopContainer.transform.GetChild(j).position.y > i)
-                    {
-                        StopContainer.transform.GetChild(j).position += Vector3.down;
-                    }
-                }
+    //            for(int j = 1; j < 11; j++)
+    //            {
+    //                m_GridSystem.setGrid(j, i, false);
+    //            }
 
-            }
-        }
+    //            for (int j = 1; j < length; j++)
+    //            {
+    //                if (StopContainer.transform.GetChild(j).position.y > i)
+    //                {
+    //                    StopContainer.transform.GetChild(j).position += Vector3.down;
+    //                }
+    //            }
 
-        if (!af)
-            return;
-        for (int j = a + 1; j < 21; j++)
-        {
-            for (int k = 1; k < 11; k++)
-            {   
-                m_GridSystem.setGrid(k, j, m_GridSystem.getGrid(k, j + 1));
-            }
-        }
+    //        }
+    //    }
 
-        return;
+    //    if (!tf)
+    //        return;
 
-    }
+    //    for (int j = tmp + 1; j < 21; j++)
+    //    {
+    //        for (int k = 1; k < 11; k++)
+    //        {   
+    //            m_GridSystem.setGrid(k, j, m_GridSystem.getGrid(k, j + 1));
+    //        }
+    //    }
+
+    //    return;
+    //}
 }

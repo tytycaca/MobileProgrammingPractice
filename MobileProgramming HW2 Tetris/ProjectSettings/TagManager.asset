@@ -15,6 +15,7 @@ TagManager:
   - StopBlocks
   - StopContainer
   - GarbageObj
+  - ScoreSystem
   layers:
   - Default
   - TransparentFX

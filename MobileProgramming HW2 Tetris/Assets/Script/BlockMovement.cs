@@ -11,6 +11,7 @@ public class BlockMovement : MonoBehaviour
     private Spawner m_Spawner = new Spawner();
     private GridSystem m_GridSystem = new GridSystem();
     private CollapseSystem m_CollapseSystem = new CollapseSystem();
+    private ScoreSystem m_ScoreSystem = new ScoreSystem();
 
     private GameObject StopContainer;
 
@@ -23,6 +24,7 @@ public class BlockMovement : MonoBehaviour
         m_Spawner = GameObject.FindGameObjectWithTag("Spawner").GetComponent<Spawner>();
         m_GridSystem = GameObject.FindGameObjectWithTag("GridSystem").GetComponent<GridSystem>();
         m_CollapseSystem = GameObject.FindGameObjectWithTag("CollapseSystem").GetComponent<CollapseSystem>();
+        m_ScoreSystem = GameObject.FindGameObjectWithTag("ScoreSystem").GetComponent<ScoreSystem>();
 
         StopContainer = GameObject.FindGameObjectWithTag("StopContainer");
 
